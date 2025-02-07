@@ -260,6 +260,25 @@ class RedBlackTree:
         # Percorre a subárvore direita
         return self._find_kth_helper(node.right, k)
     
+    def findInterval(self, low, high):
+            self._find_interval_helper(self.root, low, high)
+
+    def _find_interval_helper(self, node, low, high):
+        if node == self.NIL:
+                return
+
+        # Se o valor do nó for maior que low, percorre a subárvore esquerda
+        if node.key > low:
+                self._find_interval_helper(node.left, low, high)
+
+        # Se o valor do nó estiver no intervalo [low, high], imprime o valor
+        if low <= node.key <= high:
+                print(node.key, end=' ')
+
+        # Se o valor do nó for menor que high, percorre a subárvore direita
+        if node.key < high:
+            self._find_interval_helper(node.right, low, high)
+    
     def printTree(self):
         self._print_tree_helper(self.root, "", True)
 
@@ -335,6 +354,12 @@ rb_tree.printInOrder()
 print("find min: ", rb_tree.findMin())
 print("find max: ", rb_tree.findMax())
 print("find kth: ", rb_tree.findKth(5))
+#5. Encontre todos os elementos entre 10 e 30.  
 
+print("\nElementos no intervalo [10, 30]:")
+rb_tree.findInterval(10, 25)
+print("\n")
+
+#printando a árvore
 rb_tree.printTree()
 
